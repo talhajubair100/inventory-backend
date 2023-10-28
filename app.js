@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const apiRouters = require("./routes/api/api");
 // const apiRouters = require("./routes/api.js");
 
 
@@ -14,7 +15,7 @@ app.get("/", (req, res) => {
   res.send("Route is working! YaY!");
 });
 
-// app.use("/api/v1", apiRouters);
+app.use("/api", apiRouters);
 
 
 module.exports = app;
