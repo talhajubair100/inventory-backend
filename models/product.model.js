@@ -46,6 +46,15 @@ const productSchema = new Schema({
     
 }, { timestamps: true })
 
+productSchema.pre("save", function (next) {
+    if (this.quantity == 0) {
+        this.status = "out-of-stock";
+    }
+    next();
+});
+
+
+
 const Product = model("Product", productSchema);
 
 module.exports = Product;
