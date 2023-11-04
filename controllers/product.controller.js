@@ -76,11 +76,28 @@ const postProduct = (async (req, res, next) => {
 const updateProduct = (async (req, res, next) => {
     try{
         const {id} = req.params;
-        const result = await Product.updateOne({ _id : id}, {$set: req.body})
+        const result = await Product.updateOne({ _id : id}, {$set: req.body}, { runValidators: true })
         res.status(200).json({
             status: "success",
             msg: "Products updated",
             data: result
+        });
+
+    }
+    catch (error) {
+        message: "Products can not be updated"
+        res.status(500).json({ error: error.message })
+    }
+})
+
+const bulkUpdateProduct = (async (req, res, next) => {
+    try{
+        
+        const updatedProducts = await Product.updateMany( { _id: req.body.ids }, { $set: req.body.data }, {runValidators : true});
+        res.status(200).json({
+            status: "success",
+            msg: "Products updated",
+            data: updatedProducts
         });
 
     }
@@ -97,4 +114,5 @@ module.exports = {
     getProduct,
     postProduct,
     updateProduct,
+    bulkUpdateProduct,
 }
