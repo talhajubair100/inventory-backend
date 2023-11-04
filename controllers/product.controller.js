@@ -73,10 +73,28 @@ const postProduct = (async (req, res, next) => {
     }
 })
 
+const updateProduct = (async (req, res, next) => {
+    try{
+        const {id} = req.params;
+        const result = await Product.updateOne({ _id : id}, {$set: req.body})
+        res.status(200).json({
+            status: "success",
+            msg: "Products updated",
+            data: result
+        });
+
+    }
+    catch (error) {
+        message: "Products can not be updated"
+        res.status(500).json({ error: error.message })
+    }
+})
+
 
 
 module.exports = {
     getProducts,
     getProduct,
     postProduct,
+    updateProduct,
 }
