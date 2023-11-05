@@ -124,6 +124,23 @@ const deleteProduct = (async (req, res, next) => {
     }
 })
 
+const bulkDeleteProduct = (async (req, res, next) => {
+    try{
+        
+        const deleteProducts = await Product.deleteMany( { _id: req.body.ids });
+        res.status(200).json({
+            status: "success",
+            msg: "Products deleted successfully",
+            data: deleteProducts
+        });
+
+    }
+    catch (error) {
+        message: "Products can not be deleted"
+        res.status(500).json({ error: error.message })
+    }
+})
+
 
 
 module.exports = {
@@ -132,5 +149,6 @@ module.exports = {
     postProduct,
     updateProduct,
     bulkUpdateProduct,
-    deleteProduct
+    deleteProduct,
+    bulkDeleteProduct
 }
