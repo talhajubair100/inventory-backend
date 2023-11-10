@@ -5,7 +5,7 @@ Step-by-step instructions on how to install your project locally.
 git clone https://github.com/talhajubair100/inventory-backend
 
 # Navigate to the project directory
-cd inventory-management-backend
+cd inventory-backend
 
 # Install dependencies
 yarn
