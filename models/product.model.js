@@ -6,16 +6,17 @@ const productSchema = new Schema({
         type: String,
         required: [true, "Product name is required"],
         trim: true,
+        unique: true,
+        lowercase: true,
         maxlength: [100, "product name can not be more than 100 characters"]
+    },
+    image: {
+        type: String,
+        validate: [ validator.isURL, 'Invalid URL'],
     },
     description: {
         type: String,
         required: [true, "Product description is required"]
-    },
-    price: {
-        type: Number,
-        required: [true, "Product price is required"],
-        min: [0, "Product price can not be less than 0"]
     },
     unit: {
         type: String,
@@ -25,33 +26,29 @@ const productSchema = new Schema({
             message: "Please select correct unit for product"
         }
     },
-    quantity: {
-        type: Number,
-        required: [true, "Product quantity is required"],
-        min: [0, "Product quantity can not be less than 0"],
-        validate : {
-            validator: Number.isInteger,
-            message: "{VALUE} is not an integer value"
-        }
-    },
-    status: {
+    category: {
         type: String,
-        required: [true, "Product status is required"],
-        enum: {
-            values: ["active", "inactive", "in-stock", "out-of-stock"],
-            message: "Please select correct status for product"
-        }
+        required: [true, "Product category is required"],
     },
-
-    
+    brand: {
+        name: {
+            type: String,
+            required: [true, "Product brand is required"],
+        },
+        id:{
+            type: ObjectId,
+            ref: "Brand",
+            required: [true, "Product brand is required"],
+        }
+    }
 }, { timestamps: true })
 
-productSchema.pre("save", function (next) {
-    if (this.quantity == 0) {
-        this.status = "out-of-stock";
-    }
-    next();
-});
+// productSchema.pre("save", function (next) {
+//     if (this.quantity == 0) {
+//         this.status = "out-of-stock";
+//     }
+//     next();
+// });
 
 
 
