@@ -2,7 +2,7 @@ const Brand = require('../models/brand.model');
 
 const getBrands = async (req, res, next) => {
     try{
-        const brands = await Brand.find().select('-products -suppliers');
+        const brands = await Brand.find().populate('products');
         // const brands = await Brand.find().select('products', 'suppliers');
 
         res.status(200).json({

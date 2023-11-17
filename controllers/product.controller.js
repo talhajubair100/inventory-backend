@@ -1,3 +1,4 @@
+const Brand = require("../models/brand.model");
 const Product = require("../models/product.model");
 
 
@@ -48,12 +49,12 @@ const postProduct = (async (req, res, next) => {
         const product = new Product(req.body)
 
 
-        // const { _id, brand, categories } = product
+        const { _id: productID, brand } = product
 
-        // await Brand.updateOne(
-        //     { _id: brand.id },
-        //     { $push: { products: _id } }
-        // );
+        await Brand.updateOne(
+            { _id: brand.id },
+            { $push: { products: productID } }
+        );
 
         // await Category.updateOne(
         //     { _id: categories.id },
