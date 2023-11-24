@@ -142,6 +142,22 @@ const bulkDeleteProduct = (async (req, res, next) => {
     }
 })
 
+const fileUpload = (async (req, res, next) => {
+    try{
+        console.log(req.file)
+        res.status(200).json({
+            status: "success",
+            msg: "picture uploaded",
+            data: req.file
+        });
+
+    }
+    catch (error) {
+        message: "picture upload error"
+        res.status(500).json({ error: error.message })
+    }
+})
+
 
 
 module.exports = {
@@ -151,5 +167,6 @@ module.exports = {
     updateProduct,
     bulkUpdateProduct,
     deleteProduct,
-    bulkDeleteProduct
+    bulkDeleteProduct,
+    fileUpload
 }

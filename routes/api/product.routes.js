@@ -1,7 +1,10 @@
-const { postProduct, getProducts, getProduct, updateProduct, bulkUpdateProduct, deleteProduct, bulkDeleteProduct, } = require("../../controllers/product.controller");
+const { postProduct, getProducts, getProduct, updateProduct, bulkUpdateProduct, deleteProduct, bulkDeleteProduct, fileUpload, } = require("../../controllers/product.controller");
+const uploader = require("../../middleware/uploader");
 
 const productRoutes = require("express").Router();
 
+
+productRoutes.post("/file-upload", uploader.single("product_image"), fileUpload)
 productRoutes.get("/", getProducts);
 productRoutes.get("/:id", getProduct);
 productRoutes.post('/', postProduct)
