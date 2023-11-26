@@ -12,7 +12,6 @@ const stockSchema = new Schema({
         type: String,
         required: [true, "Stock name is required"],
         trim: true,
-        unique: true,
         lowercase: true,
         maxlength: [100, "stock name can not be more than 100 characters"]
     },
@@ -83,7 +82,11 @@ const stockSchema = new Schema({
             type: ObjectId,
             ref: 'Supplier'
         }
-    }
+    },
+    sellCount: {
+        type: Number,
+        default: 0
+    },
 }, { timestamps: true });
 
 const Stock = model('Stock', stockSchema);

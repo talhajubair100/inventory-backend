@@ -3,6 +3,7 @@
 const brandRoutes = require("./api/brand.routes");
 const categoryRoutes = require("./api/category.routes");
 const productRoutes = require("./api/product.routes");
+const stockRoutes = require("./api/stock.routes");
 const storeRoutes = require("./api/store.routes");
 const supplierRoutes = require("./api/supplier.routes");
 
@@ -13,6 +14,8 @@ apiRouters.use("/brand", brandRoutes);
 apiRouters.use("/category", categoryRoutes);
 apiRouters.use("/supplier", supplierRoutes)
 apiRouters.use("/store", storeRoutes)
+apiRouters.use("/stock", stockRoutes)
+
 
 
 
